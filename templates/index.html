@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="container">
+    <div class="timer_container">
         <h1>Pomodoro Timer</h1>
+        <div style="display: flex; ">
+            <h3><span id="pomodoro_state" >Study Time</span> <span id="pomodoro_cycles">1</span> / {{cycles}}</h3>
+        </div>
         <div id="timer">
             <span id="minutes">{{ work_time }}</span>:<span id="seconds">00</span>
         </div>
@@ -21,8 +24,9 @@
     </div>
     <script>
         let workTime = "{{ work_time }}";
-        let breakTime = "{{ break_time }}";
+        let shortBreakTime = "{{ short_break_time }}";
         let cycles = "{{ cycles }}";
+        let longBreakTime = "{{ long_break_time }}"
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
