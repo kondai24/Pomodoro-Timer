@@ -25,13 +25,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         resetButton.classList.add('visually-hidden');
         stopButton.classList.remove('visually-hidden');
         if(isWorkTime){
-            totalSeconds = workTime * 60 * 1000;
+            totalSeconds = workTime * 60;
         }else if(isShortBreakTime){
-            totalSeconds = shortBreakTime * 60 * 1000
+            totalSeconds = shortBreakTime * 60;
         }else{
-            totalSeconds = longBreakTime * 60 * 1000;
+            totalSeconds = longBreakTime * 60 ;
         }
-        totalSeconds = (isWorkTime ? workTime : breakTime) * 60;
         timer = setInterval(updateTimer, 1000);
 
     });
@@ -66,8 +65,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function updateTimer() {
     let currentTime = new Date();
     // 1ms単位なので、/1000
-    let elapsedTime = (currentTime - startTime - elapsedPausedTime);
-    let remainingTime = Math.floor((totalSeconds - elapsedTime) / 1000);
+    let elapsedTime = Math.floor((currentTime - startTime - elapsedPausedTime) / 1000);
+    let remainingTime = (totalSeconds - elapsedTime);
 
     if (remainingTime <= 0) {
         // 勉強時間が終わった時
@@ -106,9 +105,6 @@ function updateTimer() {
             document.getElementById('pomodoro_cycles').textContent = currentCycle.toString();
             document.getElementById('pomodoro_state').textContent = "Study Time"
             isWorkTime = true;
-            // startTime = new Date();
-            // elapsedPausedTime = 0;
-            // totalSeconds = workTime * 60;
             StartNewTimer(workTime);
             PushStart();
         }
@@ -125,6 +121,7 @@ function updateDisplay(totalSeconds) {
     document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds.toString();
 }
 
+// 引数のTimeの単位はmin
 function StartNewTimer(Time){
     startTime = new Date();
     elapsedPausedTime = 0;
