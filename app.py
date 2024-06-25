@@ -1,9 +1,7 @@
 from flask import Flask
 from flask import render_template, redirect, request, url_for
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
 
 setting_dict = {}
 
